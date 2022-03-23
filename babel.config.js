@@ -30,6 +30,18 @@ module.exports = function(api) {
         '@babel/plugin-proposal-optional-chaining',
         '@babel/plugin-syntax-dynamic-import',
         '@babel/plugin-transform-runtime',
+        ['module-resolver', {
+            resolvePath: (sourcePath, currentFile) => {
+                switch (sourcePath) {
+                    case '@@system':
+                        return resolveAlias('system', currentFile);
+                    case '@@types':
+                        return resolveAlias('types', currentFile);
+                    case '@@utils':
+                        return resolveAlias('utils', currentFile);
+                }
+            },
+        }],
         ['babel-plugin-styled-components', {
             ssr: true,
             displayName: NODE_ENV !== 'production',
@@ -50,4 +62,10 @@ module.exports = function(api) {
         presets,
         plugins,
     };
+};
+
+const resolveAlias = (sourcePath, currentFile) => {
+    const rootPath = currentFile.substring(0, currentFile.indexOf('src') + 4); // 4 -> src/
+
+    return '' + rootPath + sourcePath;
 };
