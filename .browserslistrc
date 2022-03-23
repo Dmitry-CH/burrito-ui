@@ -1,0 +1,13 @@
+[product]
+> 1%
+last 4 version and supports es6-module
+not dead
+not IE 11
+not op_mini all
+
+[modern]
+last 2 chrome version
+last 2 firefox version
+
+[ssr]
+node 16
