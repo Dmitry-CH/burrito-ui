@@ -6,7 +6,7 @@ const config = {
         property: 'background',
         scale: 'colors',
     },
-    bgColor: {
+    backgroundColor: {
         property: 'background-color',
         scale: 'colors',
     },
@@ -18,5 +18,6 @@ const config = {
 };
 
 config.bg = config.background;
+config.bgColor = config.backgroundColor;
 
 export const color = system(config);

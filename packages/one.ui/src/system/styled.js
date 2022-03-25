@@ -1,6 +1,6 @@
 import _styled from 'styled-components';
 
-import {allComposed} from '../styled-system';
+import {all} from '../styled-system';
 import {shouldForwardProp} from './should-forward-prop';
 
 
@@ -27,5 +27,5 @@ const toCSSObject = (style) => (props) => {
 
     const mergedStyles = Object.assign({}, styleBase, styleProps);
 
-    return allComposed(mergedStyles);
+    return all(mergedStyles);
 };
