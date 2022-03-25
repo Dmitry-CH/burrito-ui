@@ -93,7 +93,7 @@ const Template = (args) => <Text {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-    as: 'div',
+    as: 'span',
     children: 'Text<br> content',
     isRawHTML: false,
     isTruncated: false,
