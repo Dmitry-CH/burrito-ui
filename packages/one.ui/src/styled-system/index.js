@@ -1,6 +1,7 @@
 import {compose} from '@styled-system/core';
 
 import {background} from './background';
+import {border} from './border';
 import {color} from './color';
 import {flexbox} from './flexbox';
 import {gradient} from './gradient';
@@ -17,6 +18,7 @@ export {mapTheme} from './core/map-theme';
 
 export const resolveStyles = compose(
     background,
+    border,
     color,
     flexbox,
     gradient,

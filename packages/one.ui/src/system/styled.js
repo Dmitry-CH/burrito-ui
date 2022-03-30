@@ -9,7 +9,9 @@ export function styled(component, style = {}, opts = {}) {
     let styledFn = _styled(component);
 
     styledFn = styledFn.withConfig({
-        shouldForwardProp: opts.shouldForwardProp ?? shouldForwardProp,
+        shouldForwardProp: opts.shouldForwardProp
+            ? (prop) => shouldForwardProp(prop) && opts.shouldForwardProp(prop)
+            : shouldForwardProp,
     });
 
     if (opts.attrs) {
