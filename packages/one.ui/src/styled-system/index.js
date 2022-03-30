@@ -1,5 +1,7 @@
 import {compose} from '@styled-system/core';
 
+import {colorStyle, textStyle}  from './core/variants';
+
 import {background} from './background';
 import {border} from './border';
 import {color} from './color';
@@ -29,4 +31,7 @@ export const resolveStyles = compose(
     shadow,
     space,
     typography,
+    // add variants
+    colorStyle,
+    textStyle,
 );

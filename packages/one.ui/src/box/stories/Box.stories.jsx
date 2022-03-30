@@ -77,7 +77,7 @@ export const Label = Template.bind({});
 Label.args = {
     ...Default.args,
     bg: 'info',
-    borderRadius: '12',
+    borderRadius: '16px',
     children: 'simple label',
     color: 'white',
     px: 3,
