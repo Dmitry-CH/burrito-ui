@@ -13,7 +13,9 @@ import {space} from './space';
 import {typography} from './typography';
 
 
-export const all = compose(
+export {mapTheme} from './core/map-theme';
+
+export const resolveStyles = compose(
     background,
     color,
     flexbox,
@@ -26,15 +28,3 @@ export const all = compose(
     space,
     typography,
 );
-
-export {background};
-export {color};
-export {flexbox};
-export {gradient};
-export {grid};
-export {layout};
-export {other};
-export {position};
-export {shadow};
-export {space};
-export {typography};

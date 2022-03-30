@@ -1,6 +1,7 @@
 import _styled from 'styled-components';
 
-import {all} from '../styled-system';
+import {mapTheme, resolveStyles} from '../styled-system';
+import {parsePseudo} from './parse-pseudo';
 import {shouldForwardProp} from './should-forward-prop';
 
 
@@ -18,14 +19,40 @@ export function styled(component, style = {}, opts = {}) {
     return styledFn(toCSSObject(style));
 }
 
-const toCSSObject = (style) => (props) => {
-    const styleBase = (typeof style === 'function')
-        ? style(props)
-        : style;
+const toCSSObject = (styles) => (props) => {
+    const {theme = {}} = props;
 
-    const styleProps = props;
+    const baseStyles = (typeof styles === 'function')
+        ? styles(props)
+        : styles;
 
-    const mergedStyles = Object.assign({}, styleBase, styleProps);
+    const propsStyles = props;
 
-    return all(mergedStyles);
+    const mergedStyles = Object.assign({},
+        baseStyles,
+        propsStyles
+    );
+
+    const [pseudoStyles, systemStyles] = extractStyles(mergedStyles);
+
+    return Object.assign({},
+        resolveStyles(systemStyles),
+        parsePseudo(
+            mapTheme(pseudoStyles, theme)
+        ),
+    );
+};
+
+const extractStyles = (obj) => {
+    const pick = {};
+    const omit = {};
+
+    for (const key in obj) {
+        if (!Object.prototype.hasOwnProperty.call(obj, key)) continue;
+
+        if (/^_/.test(key)) pick[key] = obj[key];
+        else omit[key] = obj[key];
+    }
+
+    return [pick, omit];
 };
