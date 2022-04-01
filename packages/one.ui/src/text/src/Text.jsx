@@ -1,10 +1,14 @@
+import * as R from 'ramda';
 import {forwardRef} from 'react';
 
 import {ui} from '@@system';
-import {useDOMRefs, useValidateProps} from '@@utils';
+import {useDOMRefs, useComponentTheme, useValidateProps} from '@@utils';
 
 import {Box} from '../../box';
-import {truncate} from '../helpers/truncate';
+
+import {truncate} from './helpers/truncate';
+import {useNormalizeProps} from './helpers/use-normalize-props';
+import {textTypes} from './prop-types';
 
 
 const StyledText = ui(Box, truncate, {
@@ -12,7 +16,14 @@ const StyledText = ui(Box, truncate, {
 });
 
 export const Text = forwardRef((props, ref) => {
-    // useValidateProps(props, boxTypes);
+    // useValidateProps(props, textTypes);
+
+    const themeProps = useComponentTheme('Text', props);
+
+    const normalizedProps = useNormalizeProps(R.mergeAll([
+        themeProps,
+        props,
+    ]));
 
     const {
         as = 'span',
@@ -20,7 +31,7 @@ export const Text = forwardRef((props, ref) => {
         isTruncated = false,
         numOfLines = 1,
         ...otherProps
-    } = props;
+    } = normalizedProps;
 
     const domRef = useDOMRefs(ref);
 

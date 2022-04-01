@@ -35,13 +35,13 @@ const toCSSObject = (styles) => (props) => {
         propsStyles
     );
 
+    // suppport sx prop
+
     const [pseudoStyles, systemStyles] = extractStyles(mergedStyles);
 
     return Object.assign({},
         resolveStyles(systemStyles),
-        parsePseudo(
-            mapTheme(pseudoStyles, theme)
-        ),
+        mapTheme(parsePseudo(pseudoStyles), theme),
     );
 };
 

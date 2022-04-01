@@ -1,24 +1,33 @@
+import * as R from 'ramda';
 import {forwardRef} from 'react';
 
 import {ui} from '@@system';
-import {useDOMRefs, useValidateProps} from '@@utils';
+import {useDOMRefs, useComponentTheme, useValidateProps} from '@@utils';
 
+import {useNormalizeProps} from './helpers/use-normalize-props';
 import {boxTypes} from './prop-types';
 
 
-const StyledBox = ui('div');
+const StyledBox = ui('div', {boxSizing: 'border-box'});
 
 export const Box = forwardRef((props, ref) => {
     // useValidateProps(props, boxTypes);
+
+    const themeProps = useComponentTheme('Box', props);
+
+    const normalizedProps = useNormalizeProps(R.mergeAll([
+        themeProps,
+        props,
+    ]));
 
     const {
         as = 'div',
         children,
         isRawHTML = false,
         ...otherProps
-    } = props;
+    } = normalizedProps;
 
-    const safeChildren = makeSafeChildren(isRawHTML, children);
+    const safeChildren = makeSafeChildren(children, isRawHTML);
 
     const domRef = useDOMRefs(ref);
 
@@ -38,6 +47,6 @@ if (typeof __DEV__ !== 'undefined' && __DEV__) {
 }
 
 // Helpers
-const makeSafeChildren = (isRawHTML, children) => (isRawHTML
+const makeSafeChildren = (children, isRawHTML) => (isRawHTML
     ? {dangerouslySetInnerHTML: {__html: children}}
     : {children});
