@@ -16,9 +16,9 @@ import {space} from './space';
 import {typography} from './typography';
 
 
-export {mapTheme} from './core/map-theme';
+export {mapToTheme} from './core/map-to-theme';
 
-export const resolveStyles = compose(
+export const resolveStyledProps = compose(
     background,
     border,
     color,
@@ -35,3 +35,5 @@ export const resolveStyles = compose(
     colorStyle,
     textStyle,
 );
+
+export const styledPropNames = resolveStyledProps.propNames;

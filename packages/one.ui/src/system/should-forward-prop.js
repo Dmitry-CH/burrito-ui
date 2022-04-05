@@ -1,4 +1,4 @@
-import {resolveStyles,} from '../styled-system';
+import {styledPropNames} from '../styled-system';
 import {pseudoSelectors} from '../styled-system/pseudo';
 
 
@@ -11,6 +11,6 @@ function defaultStyleValidatorFn(prop) {
 }
 
 const allNames = [
-    ...resolveStyles.propNames.filter((name) => !['height', 'width'].includes(name)),
+    ...styledPropNames.filter((name) => !['height', 'width'].includes(name)),
     ...Object.keys(pseudoSelectors),
 ];

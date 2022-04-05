@@ -1,6 +1,8 @@
 import _styled from 'styled-components';
 
-import {mapTheme, resolveStyles} from '../styled-system';
+import {mapToTheme, resolveStyledProps} from '../styled-system';
+import {pseudoSelectors} from '../styled-system/pseudo';
+
 import {parsePseudo} from './parse-pseudo';
 import {shouldForwardProp} from './should-forward-prop';
 
@@ -21,12 +23,14 @@ export function styled(component, style = {}, opts = {}) {
     return styledFn(toCSSObject(style));
 }
 
-const toCSSObject = (styles) => (props) => {
+const PSEUDO_NAMES = Object.keys(pseudoSelectors);
+
+const toCSSObject = (styled) => (props) => {
     const {theme = {}} = props;
 
-    const baseStyles = (typeof styles === 'function')
-        ? styles(props)
-        : styles;
+    const baseStyles = (typeof styled === 'function')
+        ? styled(props)
+        : styled;
 
     const propsStyles = props;
 
@@ -35,26 +39,31 @@ const toCSSObject = (styles) => (props) => {
         propsStyles
     );
 
-    // suppport sx prop
-
-    const [pseudoStyles, systemStyles] = extractStyles(mergedStyles);
+    const [systemStyles, pseudoStyles, sxStyles] = extractStyles(mergedStyles);
 
     return Object.assign({},
-        resolveStyles(systemStyles),
-        mapTheme(parsePseudo(pseudoStyles), theme),
+        resolveStyledProps(systemStyles),
+        mapToTheme(sxStyles, theme),
+        mapToTheme(parsePseudo(pseudoStyles), theme),
     );
 };
 
-const extractStyles = (obj) => {
-    const pick = {};
-    const omit = {};
+const extractStyles = (styles) => {
+    const {sx: sxStyles = {}, ...restStyles} = styles;
 
-    for (const key in obj) {
-        if (!Object.prototype.hasOwnProperty.call(obj, key)) continue;
+    const systemStyles = {};
+    const pseudoStyles = {};
 
-        if (/^_/.test(key)) pick[key] = obj[key];
-        else omit[key] = obj[key];
+    for (const key in restStyles) {
+        if (!Object.prototype.hasOwnProperty.call(restStyles, key)) continue;
+
+        if (PSEUDO_NAMES.includes(key)) pseudoStyles[key] = restStyles[key];
+        else systemStyles[key] = restStyles[key];
     }
 
-    return [pick, omit];
+    return [
+        systemStyles,
+        pseudoStyles,
+        sxStyles,
+    ];
 };

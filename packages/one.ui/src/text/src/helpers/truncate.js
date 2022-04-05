@@ -8,20 +8,24 @@ export function truncate(props) {
 
     if (numOfLines > 1) {
         return {
-            'display': '-webkit-box',
-            'overflow': 'hidden',
-            'text-overflow': 'ellipsis',
-            '-webkit-box-orient': 'vertical',
-            '-webkit-line-clamp': numOfLines,
+            sx: {
+                'display': '-webkit-box',
+                'overflow': 'hidden',
+                'text-overflow': 'ellipsis',
+                '-webkit-box-orient': 'vertical',
+                '-webkit-line-clamp': numOfLines,
+            },
         };
     }
 
     return {
+        sx: {
         // 'display': 'inline-block',
         'max-width': '100%',
         'overflow': 'hidden',
         'text-overflow': 'ellipsis',
         'white-space': 'nowrap',
         'word-wrap': 'normal',
+        },
     };
 }

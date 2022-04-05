@@ -1,6 +1,6 @@
 import css from '@styled-system/css';
 
 
-export function mapTheme(obj, theme) {
+export function mapToTheme(obj, theme) {
     return css(obj)(theme);
 }
