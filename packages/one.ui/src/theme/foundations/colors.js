@@ -1,6 +1,4 @@
 export const colors = {
-    current: 'currentColor',
-    transparent: 'transparent',
     white: '#ffffff',
     black: '#000000',
     grey: {
@@ -16,9 +14,9 @@ export const colors = {
         900: '#222222',
     },
     info: '#2979ff',
+    alert: '#ff0000',
     success: '#3db014',
     warning: '#ffad1f',
-    alert: '#ff0000',
     brand: {
         primary: '#6f37a8',
         primaryLight: '#6f37a8',

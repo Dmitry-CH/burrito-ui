@@ -1,4 +1,5 @@
 export const space = {
+    px: '1px',
     0: '0',
     1: '4px',
     2: '8px',
@@ -10,7 +11,6 @@ export const space = {
     8: '32px',
     9: '36px',
     10: '40px',
-    11: '44px',
     12: '48px',
     14: '56px',
     16: '64px',
@@ -30,5 +30,4 @@ export const space = {
     72: '288px',
     80: '320px',
     96: '384px',
-    px: '1px',
 };
