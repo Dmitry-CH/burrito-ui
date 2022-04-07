@@ -1,4 +1,4 @@
 export {ui} from './factory';
-export {shouldForwardProp} from './should-forward-prop';
-export {styled} from './styled';
+
+export {GlobalStyle} from './global-style';
 export {ThemeProvider} from './theme-provider';

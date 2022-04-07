@@ -1,4 +1,4 @@
-import {ThemeProvider} from '../packages/one.ui/src/system';
+import {GlobalStyle, ThemeProvider} from '../packages/one.ui/src/system';
 import theme from '../packages/one.ui/src/theme';
 
 
@@ -8,6 +8,7 @@ export const decorators = [
 
         return (
             <ThemeProvider theme={theme}>
+                <GlobalStyle />
                 <Story />
             </ThemeProvider>
         );
