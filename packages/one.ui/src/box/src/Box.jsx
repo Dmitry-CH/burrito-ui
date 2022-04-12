@@ -5,13 +5,13 @@ import {ui} from '@@system';
 import {useDOMRefs, useComponentTheme, useValidateProps} from '@@utils';
 
 import {useNormalizeProps} from './helpers/use-normalize-props';
-import {boxTypes} from './prop-types';
+import {BoxTypes} from './prop-types';
 
 
 const StyledBox = ui('div', {boxSizing: 'border-box'});
 
 export const Box = forwardRef((props, ref) => {
-    // useValidateProps(props, boxTypes);
+    useValidateProps(props, BoxTypes);
 
     const themeProps = useComponentTheme('Box', props);
 

@@ -8,7 +8,7 @@ import {Box} from '../../box';
 
 import {truncate} from './helpers/truncate';
 import {useNormalizeProps} from './helpers/use-normalize-props';
-import {textTypes} from './prop-types';
+import {TextTypes} from './prop-types';
 
 
 const StyledText = ui(Box, truncate, {
@@ -16,7 +16,7 @@ const StyledText = ui(Box, truncate, {
 });
 
 export const Text = forwardRef((props, ref) => {
-    // useValidateProps(props, textTypes);
+    useValidateProps(props, TextTypes);
 
     const themeProps = useComponentTheme('Text', props);
 

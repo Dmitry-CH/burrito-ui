@@ -1,2 +1,3 @@
-export {baseTypes, eventTypes} from './base-prop-types';
-export {styleTypes} from './style-prop-types';
+export {EventTypes} from './event-types';
+export {BaseTypes, HTMLTypes} from './html-types';
+export {StyleTypes} from './style-types';

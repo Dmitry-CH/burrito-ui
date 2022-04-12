@@ -1,5 +1,4 @@
 import * as R from 'ramda';
-import {useMemo} from 'react';
 import {createGlobalStyle} from 'styled-components';
 
 import {useTheme} from '@@utils';
@@ -22,10 +21,10 @@ export const GlobalStyle = () => {
         ),
     ])(theme);
 
-    const Global = useMemo(() => createGlobalStyle`
+    const Global = createGlobalStyle`
         ${fontCSS}
         ${rootCSS}
-    `, []);
+    `;
 
     if (typeof __DEV__ !== 'undefined' && __DEV__) {
         Global.displayName = 'Global';

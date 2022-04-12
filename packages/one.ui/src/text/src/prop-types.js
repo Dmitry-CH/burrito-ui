@@ -1,21 +1,28 @@
 import {
     assign,
     boolean,
+    integer,
     object,
     optional,
     string,
+    type,
 } from 'superstruct';
 
-import {baseTypes, eventTypes, styleTypes} from '@@types';
+import {BaseTypes, HTMLTypes, EventTypes, StyleTypes} from '@@types';
 
 
-export const customTypes = object({
+const CustomTypes = object({
     as: optional(string()),
+    isRawHTML: optional(boolean()),
+    isTruncated: optional(boolean()),
+    numOfLines: optional(integer()),
 });
 
-export const textTypes = assign(
-    baseTypes,
-    eventTypes,
-    styleTypes,
-    customTypes,
+export const TextTypes = assign(
+    type({}), // convert object -> type
+    BaseTypes,
+    HTMLTypes,
+    EventTypes,
+    StyleTypes,
+    CustomTypes,
 );
