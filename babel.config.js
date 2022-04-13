@@ -1,3 +1,5 @@
+const path = require('path');
+
 const BABEL_ENV = process.env.BABEL_ENV;
 const NODE_ENV = process.env.NODE_ENV;
 
@@ -32,22 +34,23 @@ module.exports = function(api) {
         '@babel/plugin-transform-runtime',
         ['module-resolver', {
             resolvePath: (sourcePath, currentFile) => {
-                switch (sourcePath) {
-                    case '@@system':
-                        return resolveAlias('system', currentFile);
-                    case '@@types':
-                        return resolveAlias('types', currentFile);
-                    case '@@utils':
-                        return resolveAlias('utils', currentFile);
-                }
+                if (NODE_ENV === 'development' && /^@burrito-ui/.test(sourcePath)) {
+                    return path.resolve(
+                        'packages',
+                        sourcePath.replace(/@burrito-ui[/|\\]/, ''),
+                        'src',
+                        'index.js',
+                    );
+                };
+
+                return sourcePath;
             },
         }],
-        ['babel-plugin-styled-components', {
-            ssr: true,
+        ['styled-components', {
             displayName: NODE_ENV !== 'production',
             fileName: false,
             pure: NODE_ENV === 'production',
-            namespace: 'core-ui',
+            ssr: true,
         }],
     ];
 
@@ -62,10 +65,4 @@ module.exports = function(api) {
         presets,
         plugins,
     };
-};
-
-const resolveAlias = (sourcePath, currentFile) => {
-    const rootPath = currentFile.substring(0, currentFile.indexOf('src') + 4); // 4 -> src/
-
-    return '' + rootPath + sourcePath;
 };

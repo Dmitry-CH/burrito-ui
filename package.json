@@ -1,22 +1,15 @@
 {
-  "name": "one-ui",
+  "name": "burrito-ui",
+  "description": "React components library",
   "license": "MIT",
-  "private": true,
   "author": "Dmitry Chekanov",
-  "description": "Monorepo One-UI",
-  "repository": "...",
-  "workspaces": [
-    "packages/*"
-  ],
-  "engineStrict": true,
-  "engines": {
-    "node": ">=16.0.0",
-    "yarn": "^1.22.0"
-  },
+  "repository": "https://github.com/Dmitry-CH/burrito-ui.git",
   "scripts": {
     "dev": "yarn start-storybook",
     "start-storybook": "start-storybook -p 6006",
-    "build-storybook": "rimraf ./build && build-storybook -o ./build",
+    "build-storybook": "yarn clean && yarn build && rimraf ./build && build-storybook -o ./build",
+    "build": "lerna run build --no-private --stream",
+    "clean": "lerna run clean --no-private --stream",
     "lerna": "lerna"
   },
   "devDependencies": {
@@ -46,6 +39,7 @@
     "concurrently": "^7.0.0",
     "core-js": "^3.21.1",
     "cross-env": "^7.0.3",
+    "env-cmd": "^10.1.0",
     "eslint": "^8.11.0",
     "framer-motion": "^6.2.8",
     "fs-extra": "^10.0.1",
@@ -61,6 +55,16 @@
     "react-dom": "^17.0.2",
     "rimraf": "^3.0.2",
     "styled-components": "^5.3.3",
+    "superstruct": "^0.15.4",
     "yargs": "^17.3.1"
-  }
+  },
+  "engineStrict": true,
+  "engines": {
+    "node": ">=16.0.0",
+    "yarn": "^1.22.0"
+  },
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ]
 }

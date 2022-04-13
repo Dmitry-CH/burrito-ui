@@ -10,7 +10,7 @@ const {
 } = process.env;
 
 module.exports = {
-    stories: ['../packages/one.ui/src/**/stories/*.stories.jsx'],
+    stories: ['../packages/**/stories/*.stories.jsx'],
     staticDirs: ['../static'],
     addons: [
         '@storybook/addon-docs',

@@ -1,5 +1,5 @@
-import {GlobalStyle, ThemeProvider} from '../packages/one.ui/src/system';
-import theme from '../packages/one.ui/src/theme';
+import {CreateGlobalStyle, ThemeProvider} from '@burrito-ui/system';
+import theme from '@burrito-ui/theme';
 
 
 export const decorators = [
@@ -8,7 +8,7 @@ export const decorators = [
 
         return (
             <ThemeProvider theme={theme}>
-                <GlobalStyle />
+                <CreateGlobalStyle />
                 <Story />
             </ThemeProvider>
         );

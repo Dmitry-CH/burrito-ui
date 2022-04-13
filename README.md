@@ -1,14 +1,2 @@
-# One-UI
-Монорепозиторий UI компонентов, предоставляет базовые компоненты для разработки интерфейсов.
-
-## Развертывание
-Убедитесь, что на вашей локальной машине установлены:
-
-**Node version >=16.0.0**,
-
-**Yarn version >=1.22.0**.
-
-1. ```git clone ...```
-2. ```cd ...```
-3. ```yarn install```
-4. ```yarn dev```
+# Burrito UI
+:warning: Warning!!! this library is a work in progress.
