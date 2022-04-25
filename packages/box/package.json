@@ -20,7 +20,8 @@
     "build": "yarn clean && concurrently yarn:build:*",
     "build:cjs": "env-cmd -f ../../config/.env.cjs.prod babel src --root-mode upward --extensions .js,.jsx --ignore **/*.test.jsx,**/*.stories.jsx --out-dir dist/cjs --source-maps",
     "build:esm": "env-cmd -f ../../config/.env.esm.prod babel src --root-mode upward --extensions .js,.jsx --ignore **/*.test.jsx,**/*.stories.jsx --out-dir dist/esm --source-maps",
-    "clean": "rimraf ./dist"
+    "clean": "rimraf ./dist",
+    "lint": "eslint src --config ../../.eslintrc.js --ext .js,.jsx --fix"
   },
   "peerDependencies": {
     "framer-motion": ">=6.2.0",
