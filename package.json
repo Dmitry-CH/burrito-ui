@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "yarn start-storybook",
     "start-storybook": "start-storybook -p 6006",
-    "build-storybook": "yarn clean && yarn build && rimraf ./build && build-storybook -o ./build",
+    "build-storybook": "yarn clean && yarn build && rimraf ./docs && build-storybook -o ./docs",
     "build": "lerna run build --no-private --stream",
     "clean": "lerna run clean --no-private --stream",
     "lint": "lerna run lint --no-private --stream",
