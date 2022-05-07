@@ -1,4 +1,5 @@
 # Build directory
+docs/
 build/
 dist/
 
