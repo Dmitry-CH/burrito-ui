@@ -1,5 +1,5 @@
 /* eslint-disable */
-import {Box} from '../src/Box';
+import {Heading} from '../src/Heading';
 
 
 describe('...', () => {
