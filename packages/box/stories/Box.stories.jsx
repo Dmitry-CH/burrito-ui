@@ -67,7 +67,7 @@ Default.args = {
     as: 'div',
     children: 'Box<br> content',
     isRawHTML: false,
-    textStyle: void 0,
+    textStyle: undefined,
 };
 Default.argTypes = {
     ...ARG_TYPES,

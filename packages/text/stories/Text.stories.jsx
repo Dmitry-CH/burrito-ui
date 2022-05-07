@@ -98,7 +98,7 @@ Default.args = {
     isRawHTML: false,
     isTruncated: false,
     numOfLines: 1,
-    textStyle: void 0,
+    textStyle: undefined,
 };
 Default.argTypes = {
     ...ARG_TYPES,

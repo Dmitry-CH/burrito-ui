@@ -17,8 +17,8 @@ const ResponsiveTypes = array(
         union([
             number(),
             string(),
-        ])
-    )
+        ]),
+    ),
 );
 
 const CSSTypes = optional(
@@ -26,11 +26,11 @@ const CSSTypes = optional(
         number(),
         string(),
         ResponsiveTypes,
-    ])
+    ]),
 );
 
 export const StyleTypes = object(
     R.fromPairs(
-        R.xprod(styledPropNames, [CSSTypes])
-    )
+        R.xprod(styledPropNames, [CSSTypes]),
+    ),
 );
