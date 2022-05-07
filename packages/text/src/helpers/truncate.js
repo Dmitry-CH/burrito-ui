@@ -9,23 +9,22 @@ export function truncate(props) {
     if (numOfLines > 1) {
         return {
             sx: {
-                'display': '-webkit-box',
-                'overflow': 'hidden',
+                display: '-webkit-box',
+                overflow: 'hidden',
                 'text-overflow': 'ellipsis',
                 '-webkit-box-orient': 'vertical',
-                '-webkit-line-clamp': numOfLines,
+                '-webkit-line-clamp': String(numOfLines),
             },
         };
     }
 
     return {
         sx: {
-        // 'display': 'inline-block',
-        'max-width': '100%',
-        'overflow': 'hidden',
-        'text-overflow': 'ellipsis',
-        'white-space': 'nowrap',
-        'word-wrap': 'normal',
+            'max-width': '100%',
+            overflow: 'hidden',
+            'text-overflow': 'ellipsis',
+            'white-space': 'nowrap',
+            'word-wrap': 'normal',
         },
     };
 }
