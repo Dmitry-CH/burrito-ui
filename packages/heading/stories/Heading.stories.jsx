@@ -12,6 +12,9 @@ const ARG_TYPES = {
                 summary: 'undefined',
             },
         },
+        type: {
+            required: true,
+        },
     },
     isRawHTML: {
         description: 'Если `true`, отобразить raw HTML.',

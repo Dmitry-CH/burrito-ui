@@ -4,7 +4,7 @@ import {
     dynamic,
     object,
     optional,
-    pick,
+    // pick,
     string,
     type,
 } from 'superstruct';
@@ -18,31 +18,26 @@ const CustomTypes = object({
 });
 
 export const BoxTypes = dynamic(({as}) => {
-    let DynamicTypes = HTMLTypes;
+    // let DynamicTypes = HTMLTypes;
 
-    if (as === 'a') {
-        DynamicTypes = pick(HTMLTypes, [
-            'coords',
-            'download',
-            'href',
-            'hrefLang',
-            'name',
-            'rel',
-            'shape',
-            'target',
-            'type',
-        ]);
-    }
-    // if (as === ...) {
+    // if (as === 'a') {
     //     DynamicTypes = pick(HTMLTypes, [
-    //         ...
-    //     ])
+    //         'coords',
+    //         'download',
+    //         'href',
+    //         'hrefLang',
+    //         'name',
+    //         'rel',
+    //         'shape',
+    //         'target',
+    //         'type',
+    //     ]);
     // }
 
     return assign(
         type({}), // convert object -> type
         BaseTypes,
-        DynamicTypes,
+        HTMLTypes,
         EventTypes,
         StyleTypes,
         CustomTypes,

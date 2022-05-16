@@ -14,6 +14,9 @@ const ARG_TYPES = {
                 summary: 'undefined',
             },
         },
+        type: {
+            required: true,
+        },
     },
     isRawHTML: {
         description: 'Если `true`, отобразить raw HTML.',
@@ -41,7 +44,7 @@ const ARG_TYPES = {
         },
         control: {
             type: 'select',
-            options: ['32x9', '21x9', '16x9', '4x3', '1x1'],
+            options: ['1x1', '4x3', '16x9', '21x9', '32x9'],
         },
     },
 };
