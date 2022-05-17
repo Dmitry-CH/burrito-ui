@@ -1,9 +1,11 @@
-import {Heading} from '../src/Heading';
+import {Text} from '../../text';
+
+import {Contact} from '../src/Contact';
 
 
 const ARG_TYPES = {
     children: {
-        description: 'Содержимое `Heading`.',
+        description: 'Содержимое `Contact`.',
         table: {
             type: {
                 summary: 'ReactNode | undefined',
@@ -15,6 +17,18 @@ const ARG_TYPES = {
         type: {
             required: true,
         },
+    },
+    customFormat: {
+        description: 'Определить кастомную функцию форматирования.',
+        table: {
+            type: {
+                summary: 'function | undefined',
+            },
+            defaultValue: {
+                summary: 'undefined',
+            },
+        },
+        control: false,
     },
     isRawHTML: {
         description: 'Если `true`, отобразить raw HTML.',
@@ -44,21 +58,6 @@ const ARG_TYPES = {
             type: 'boolean',
         },
     },
-    level: {
-        description: 'Вес заголовка.',
-        table: {
-            type: {
-                summary: 'string | undefined',
-            },
-            defaultValue: {
-                summary: '2',
-            },
-        },
-        control: {
-            type: 'inline-radio',
-            options: ['1', '2', '3', '4', '5', '6'],
-        },
-    },
     numOfLines: {
         description: 'Количество доступных строк (работает в паре с isTruncated).',
         table: {
@@ -72,20 +71,6 @@ const ARG_TYPES = {
         control: {
             type: 'inline-radio',
             options: [1, 2, 3],
-        },
-    },
-    semantic: {
-        description: 'Если `true`, отображается семантический тэг.',
-        table: {
-            type: {
-                summary: 'boolean | undefined',
-            },
-            defaultValue: {
-                summary: 'true',
-            },
-        },
-        control: {
-            type: 'boolean',
         },
     },
     textStyle: {
@@ -106,54 +91,45 @@ const ARG_TYPES = {
 };
 
 export default {
-    title: 'Content/Heading',
-    component: Heading,
+    title: 'Content/Contact',
+    component: Contact,
 };
 
-const Template = (args) => <Heading {...args} />;
+const Template = (args) => <Contact {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-    children: 'Heading<br> content',
+    children: '+7(999) 111-11-11',
+    customFormat: undefined,
     isRawHTML: false,
     isTruncated: false,
-    level: '2',
     numOfLines: 1,
-    semantic: true,
     textStyle: undefined,
 };
 Default.argTypes = {
     ...ARG_TYPES,
 };
 
-export const Semantic = Template.bind({});
-Semantic.args = {
-    ...Default.args,
-    children: 'Semantic h1 Heading content',
-    level: '1',
-};
-Semantic.argTypes = {
-    ...ARG_TYPES,
-};
+export const CustomPhone = (args) => (
+    <Contact customFormat={(s) => s.replace(/\s/g, '-')}>
+        8 999 111 11 11
+    </Contact>
+);
 
-export const NotSemantic = Template.bind({});
-NotSemantic.args = {
-    ...Default.args,
-    children: 'Not semantic h1 Heading content',
-    level: '1',
-    semantic: false,
-};
-NotSemantic.argTypes = {
-    ...ARG_TYPES,
-};
+export const Email = (args) => (
+    <Contact>test@test.ru</Contact>
+);
 
-export const SemanticAndStyled = Template.bind({});
-SemanticAndStyled.args = {
-    ...Default.args,
-    children: 'Semantic h6 and styled as h1 Heading content',
-    level: '6',
-    textStyle: 'h1',
-};
-SemanticAndStyled.argTypes = {
-    ...ARG_TYPES,
-};
+export const WithTextstyle = (args) => (
+    <>
+        <Text color="brand.primary" textStyle="h2">
+            {'Какой то текст '}
+            <Contact>8 999 111 11 11</Contact>
+        </Text>
+        <br />
+        <Text color="brand.primary" textStyle="p1">
+            {'Какой то текст '}
+            <Contact color="inherit" textStyle="h2">8 999 111 11 11</Contact>
+        </Text>
+    </>
+);
