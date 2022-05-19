@@ -1,1 +1,6 @@
-export const components = {};
+import {Container} from './container';
+
+
+export const components = {
+    Container,
+};
