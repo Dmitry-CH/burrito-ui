@@ -1,0 +1,39 @@
+{
+  "name": "@burrito-ui/grid-item",
+  "version": "0.0.0",
+  "description": "...",
+  "license": "MIT",
+  "author": "Dmitry Chekanov",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/index.js",
+      "default": "./dist/esm/index.js"
+    }
+  },
+  "repository": "https://github.com/Dmitry-CH/burrito-ui.git",
+  "scripts": {
+    "build": "yarn clean && concurrently yarn:build:*",
+    "build:cjs": "env-cmd -f ../../config/.env.cjs.prod babel src --root-mode upward --extensions .js,.jsx --ignore **/*.test.jsx,**/*.stories.jsx --out-dir dist/cjs --source-maps",
+    "build:esm": "env-cmd -f ../../config/.env.esm.prod babel src --root-mode upward --extensions .js,.jsx --ignore **/*.test.jsx,**/*.stories.jsx --out-dir dist/esm --source-maps",
+    "clean": "rimraf ./dist",
+    "lint": "eslint src --config ../../.eslintrc.js --ext .js,.jsx --fix"
+  },
+  "peerDependencies": {
+    "framer-motion": ">=6.2.0",
+    "ramda": ">=0.28.0",
+    "react": ">=17.0.0",
+    "styled-components": ">=5.3.0",
+    "superstruct": ">=0.15.0"
+  },
+  "engineStrict": true,
+  "engines": {
+    "node": ">=16.0.0",
+    "yarn": "^1.22.0"
+  },
+  "sideEffects": false
+}
