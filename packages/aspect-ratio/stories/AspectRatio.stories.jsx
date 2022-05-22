@@ -67,7 +67,7 @@ const Template = (args) => (
 export const Default = Template.bind({});
 Default.args = {
     isRawHTML: false,
-    ratio: ['16x9', '21x9'],
+    ratio: ['16x9', null, '21x9', '32x9'],
 };
 Default.argTypes = {
     ...ARG_TYPES,

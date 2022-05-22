@@ -2,9 +2,10 @@ import {
     array,
     assign,
     boolean,
-    string,
+    nullable,
     object,
     optional,
+    string,
     union,
 } from 'superstruct';
 
@@ -13,7 +14,7 @@ import {BaseTypes, EventTypes, StyleTypes} from '@burrito-ui/shared';
 
 const CustomTypes = object({
     isRawHTML: optional(boolean()),
-    ratio: optional(union([string(), array(string())])),
+    ratio: optional(union([string(), array(nullable(string()))])),
 });
 
 export const AspectRatioTypes = assign(

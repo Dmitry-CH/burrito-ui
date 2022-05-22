@@ -25,11 +25,11 @@ const POSITION_MAP = {
 };
 
 const createAlignItemsProp = ({posY, alignItems}) => (
-    POSITION_MAP[posY] ?? alignItems
+    POSITION_MAP[posY] ?? alignItems // supp array
 );
 
 const createJustifyContentProp = ({posX, justifyContent}) => (
-    POSITION_MAP[posX] ?? justifyContent
+    POSITION_MAP[posX] ?? justifyContent // supp array
 );
 
 const removeProps = R.omit([
