@@ -31,7 +31,7 @@ export const Container = forwardRef((props, ref) => {
             {...otherProps}
             ref={domRef}
             display="flex"
-            my="0"
+            my={['0', null, '0']}
             w="100%"
         >
             {children}

@@ -6,13 +6,13 @@ import {useComponentTheme, useDOMRefs, useValidateProps} from '@burrito-ui/share
 import {Box} from '@burrito-ui/box';
 
 import {useNormalizeProps} from './helpers/use-normalize-props';
-import {GridItemTypes} from './prop-types';
+import {SimpleGridTypes} from './prop-types';
 
 
-export const GridItem = forwardRef((props, ref) => {
-    useValidateProps(props, GridItemTypes);
+export const SimpleGrid = forwardRef((props, ref) => {
+    useValidateProps(props, SimpleGridTypes);
 
-    const themeProps = useComponentTheme('GridItem', props);
+    const themeProps = useComponentTheme('SimpleGrid', props);
 
     const normalizedProps = useNormalizeProps(R.mergeAll([
         themeProps,
@@ -30,11 +30,13 @@ export const GridItem = forwardRef((props, ref) => {
         <Box
             {...otherProps}
             ref={domRef}
+            display="grid"
             my={['0', null, '0']}
+            w="100%"
         >
             {children}
         </Box>
     );
 });
 
-GridItem.displayName = 'GridItem';
+SimpleGrid.displayName = 'SimpleGrid';

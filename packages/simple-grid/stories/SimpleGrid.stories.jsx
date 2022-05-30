@@ -1,11 +1,11 @@
-import {SimpleGrid} from '../../simple-grid';
+import {Box} from '../../box';
 
-import {GridItem} from '../src/GridItem';
+import {SimpleGrid} from '../src/SimpleGrid';
 
 
 const ARG_TYPES = {
     children: {
-        description: 'Содержимое `GridItem`.',
+        description: 'Содержимое `SimpleGrid`.',
         table: {
             type: {
                 summary: 'ReactNode | undefined',
@@ -18,42 +18,14 @@ const ARG_TYPES = {
             required: true,
         },
     },
-    colSpan: {
-        description: 'Количество занимаемых колонок (от 1 до 12).',
+    columns: {
+        description: 'Количество столбцов (макс. 12 колонок).',
         table: {
             type: {
                 summary: 'number | (number|null)[] | undefined',
             },
             defaultValue: {
-                summary: 'undefined',
-            },
-        },
-        control: {
-            type: 'number',
-        },
-    },
-    colStart: {
-        description: 'Начальная колонка (от 1 до 12).',
-        table: {
-            type: {
-                summary: 'number | (number|null)[] | undefined',
-            },
-            defaultValue: {
-                summary: 'undefined',
-            },
-        },
-        control: {
-            type: 'number',
-        },
-    },
-    colEnd: {
-        description: 'Крайняя колонка (от 2 до 13).',
-        table: {
-            type: {
-                summary: 'number | (number|null)[] | undefined',
-            },
-            defaultValue: {
-                summary: 'undefined',
+                summary: '1',
             },
         },
         control: {
@@ -74,8 +46,8 @@ const ARG_TYPES = {
             type: 'boolean',
         },
     },
-    rowSpan: {
-        description: 'Количество занимаемых строк (от 1 до n).',
+    rows: {
+        description: 'Количество столбцов.',
         table: {
             type: {
                 summary: 'number | (number|null)[] | undefined',
@@ -88,8 +60,8 @@ const ARG_TYPES = {
             type: 'number',
         },
     },
-    rowStart: {
-        description: 'Начальная строка (от 1 до n).',
+    spacing: {
+        description: '`Gap` между элементами сетки.',
         table: {
             type: {
                 summary: 'number | (number|null)[] | undefined',
@@ -102,8 +74,22 @@ const ARG_TYPES = {
             type: 'number',
         },
     },
-    rowEnd: {
-        description: 'Крайняя строка (от 2 до n)',
+    spacingX: {
+        description: '`Gap` между столбцами сетки.',
+        table: {
+            type: {
+                summary: 'number | (number|null)[] | undefined',
+            },
+            defaultValue: {
+                summary: 'undefined',
+            },
+        },
+        control: {
+            type: 'number',
+        },
+    },
+    spacingY: {
+        description: '`Gap` между строками сетки.',
         table: {
             type: {
                 summary: 'number | (number|null)[] | undefined',
@@ -134,8 +120,8 @@ const ARG_TYPES = {
 };
 
 export default {
-    title: 'Layout/GridItem',
-    component: GridItem,
+    title: 'Layout/SimpleGrid',
+    component: SimpleGrid,
     decorators: [
         (Story) => (
             <div
@@ -160,50 +146,47 @@ export default {
     },
 };
 
-const Template1 = (args) => (
-    <SimpleGrid columns={12}>
-        <GridItem
-            bg="tomato"
-            h="100px"
-            p="2"
-            {...args}
-        >
-            {'<i>N:</i> 1'}
-        </GridItem>
+const Template = (args) => (
+    <SimpleGrid {...args}>
+        <Box bg="tomato" height={40} />
+        <Box bg="tomato" height={40} />
+        <Box bg="tomato" height={40} />
+        <Box bg="tomato" height={40} />
+        <Box bg="tomato" height={40} />
+        <Box bg="tomato" height={40} />
+        <Box bg="tomato" height={40} />
+        <Box bg="tomato" height={40} />
+        <Box bg="tomato" height={40} />
+        <Box bg="tomato" height={40} />
+        <Box bg="tomato" height={40} />
+        <Box bg="tomato" height={40} />
     </SimpleGrid>
 );
 
-const Template2 = (args) => (
-    <SimpleGrid
-        columns={12}
-        spacing={2}
-        rows={2}
-        h="100px"
-    >
-        {args.items.map((item, i) => (
-            <GridItem
-                key={i}
-                bg="tomato"
-                p="2"
-                {...item}
-            >
-                {i + 1}
-            </GridItem>
-        ))}
-    </SimpleGrid>
-);
-
-export const Default = Template1.bind({});
+export const Default = Template.bind({});
 Default.args = {
-    colSpan: 8,
-    colStart: 3,
-    colEnd: undefined,
+    columns: 2,
     isRawHTML: false,
-    rowSpan: undefined,
-    rowStart: undefined,
-    rowEnd: undefined,
+    rows: undefined,
+    spacing: 2,
+    spacingX: undefined,
+    spacingY: undefined,
 };
 Default.argTypes = {
+    ...ARG_TYPES,
+    children: {
+        control: false,
+    },
+};
+
+export const DiffSpacing = Template.bind({});
+DiffSpacing.args = {
+    ...Default.args,
+    columns: 4,
+    spacingX: 12,
+    spacingY: 4,
+};
+DiffSpacing.argTypes = {
     ...ARG_TYPES,
     children: {
         table: {
@@ -212,34 +195,20 @@ Default.argTypes = {
     },
 };
 
-export const TwoRows = Template2.bind({});
-TwoRows.args = {
-    items: [
-        {
-            bg: 'tomato',
-            colStart: 1,
-            colSpan: 2,
-            rowStart: 1,
-            rowSpan: 2,
-        },
-        {
-            bg: 'peru',
-            colStart: 3,
-            colEnd: 13,
-            rowStart: 1,
-            rowSpan: 1,
-        },
-        {
-            bg: 'green',
-            colStart: 3,
-            colEnd: 13,
-            rowStart: 2,
-            rowSpan: 1,
-        },
-    ],
+export const RawChildren = (args) => <SimpleGrid {...args} />;
+RawChildren.args = {
+    ...Default.args,
+    children: [
+        '<div style="background: tomato; height: 160px;"></div>',
+        '<div style="background: tomato; height: 160px;"></div>',
+        '<div style="background: tomato; height: 160px;"></div>',
+    ].join(''),
+    columns: 3,
+    isRawHTML: true,
 };
-TwoRows.argTypes = {
-    items: {
+RawChildren.argTypes = {
+    ...ARG_TYPES,
+    children: {
         table: {
             disable: true,
         },

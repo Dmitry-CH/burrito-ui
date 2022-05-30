@@ -15,16 +15,15 @@ import {BaseTypes, EventTypes, StyleTypes} from '@burrito-ui/shared';
 const Responsive = union([integer(), array(nullable(integer()))]);
 
 const CustomTypes = object({
-    colSpan: optional(Responsive),
-    colStart: optional(Responsive),
-    colEnd: optional(Responsive),
+    columns: optional(Responsive),
     isRawHTML: optional(boolean()),
-    rowSpan: optional(Responsive),
-    rowStart: optional(Responsive),
-    rowEnd: optional(Responsive),
+    rows: optional(Responsive),
+    spacing: optional(Responsive),
+    spacingX: optional(Responsive),
+    spacingY: optional(Responsive),
 });
 
-export const GridItemTypes = assign(
+export const SimpleGridTypes = assign(
     BaseTypes,
     EventTypes,
     StyleTypes,

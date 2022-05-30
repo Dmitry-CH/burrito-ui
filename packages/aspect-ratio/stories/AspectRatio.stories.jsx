@@ -36,7 +36,7 @@ const ARG_TYPES = {
         description: 'Соотношение сторон.',
         table: {
             type: {
-                summary: 'string | undefined',
+                summary: 'string | (string|null)[] | undefined',
             },
             defaultValue: {
                 summary: '16x9',
@@ -71,4 +71,7 @@ Default.args = {
 };
 Default.argTypes = {
     ...ARG_TYPES,
+    children: {
+        control: false,
+    },
 };

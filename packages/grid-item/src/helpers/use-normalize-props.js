@@ -18,15 +18,15 @@ export function useNormalizeProps(props) {
     )(props);
 }
 
-const makeSpan = (n) => `span ${n}`;
+const transform = (n) => `span ${n}`;
 
-const resolveProp = R.ifElse(
+const parseProp = R.ifElse(
     R.is(Array),
     R.map(R.unless(
         R.isNil,
-        makeSpan,
+        transform,
     )),
-    makeSpan,
+    transform,
 );
 
 const createGridColumnStartProp = ({colStart, gridColumnStart}) => (
@@ -34,7 +34,7 @@ const createGridColumnStartProp = ({colStart, gridColumnStart}) => (
 );
 
 const createGridColumnEndProp = ({colEnd, colSpan, gridColumnEnd}) => (
-    colEnd ?? (colSpan && resolveProp(colSpan)) ?? gridColumnEnd
+    colEnd ?? (colSpan && parseProp(colSpan)) ?? gridColumnEnd
 );
 
 const createGridRowStartProp = ({rowStart, gridRowStart}) => (
@@ -42,7 +42,7 @@ const createGridRowStartProp = ({rowStart, gridRowStart}) => (
 );
 
 const createGridRowEndProp = ({rowEnd, rowSpan, gridRowEnd}) => (
-    rowEnd ?? (rowSpan && resolveProp(rowSpan)) ?? gridRowEnd
+    rowEnd ?? (rowSpan && parseProp(rowSpan)) ?? gridRowEnd
 );
 
 const removeProps = R.omit([
