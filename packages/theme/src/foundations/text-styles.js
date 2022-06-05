@@ -111,6 +111,7 @@ export const textStyles = {
         marginTop: 8,
         marginBottom: 4,
     },
+
     h6: {
         fontFamily: 'heading',
         fontWeight: 'bold',
@@ -151,6 +152,7 @@ export const textStyles = {
         marginTop: 3,
         marginBottom: 2,
     },
+
     btn: {
         fontFamily: 'heading',
         fontWeight: 'bold',

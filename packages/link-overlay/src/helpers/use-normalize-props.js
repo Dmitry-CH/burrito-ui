@@ -6,7 +6,7 @@ export function useNormalizeProps(props) {
     return R.pipe(
         R.converge(R.mergeLeft, [
             R.applySpec({
-                'aria-disabled': createDisabledProp,
+                forwardedAs: createAsProp,
                 rel: createRelProp,
                 target: createTargetProp,
             }),
@@ -17,8 +17,8 @@ export function useNormalizeProps(props) {
     )(props);
 }
 
-const createDisabledProp = ({isDisabled = false}) => (
-    isDisabled || null
+const createAsProp = ({as}) => (
+    as
 );
 
 const createRelProp = ({isExternal = false}) => (
@@ -30,6 +30,6 @@ const createTargetProp = ({isExternal = false}) => (
 );
 
 const removeProps = R.omit([
-    'isDisabled',
+    'as',
     'isExternal',
 ]);
