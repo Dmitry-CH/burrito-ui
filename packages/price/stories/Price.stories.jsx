@@ -1,11 +1,11 @@
 import {Text} from '../../text';
 
-import {Contact} from '../src/Contact';
+import {Price} from '../src/Price';
 
 
 const ARG_TYPES = {
     children: {
-        description: 'Содержимое `Contact`.',
+        description: 'Содержимое `Price`.',
         table: {
             type: {
                 summary: 'ReactNode | undefined',
@@ -16,6 +16,17 @@ const ARG_TYPES = {
         },
         type: {
             required: true,
+        },
+    },
+    currency: {
+        description: 'Установить валюту.',
+        table: {
+            type: {
+                summary: 'string | undefined',
+            },
+            defaultValue: {
+                summary: '\'RUB\'',
+            },
         },
     },
     customFormat: {
@@ -58,6 +69,17 @@ const ARG_TYPES = {
             type: 'boolean',
         },
     },
+    locale: {
+        description: 'Установить локаль.',
+        table: {
+            type: {
+                summary: 'string | undefined',
+            },
+            defaultValue: {
+                summary: '\'ru-RU\'',
+            },
+        },
+    },
     numOfLines: {
         description: 'Количество доступных строк (работает в паре с isTruncated).',
         table: {
@@ -91,18 +113,20 @@ const ARG_TYPES = {
 };
 
 export default {
-    title: 'Data Display/Contact',
-    component: Contact,
+    title: 'Data Display/Price',
+    component: Price,
 };
 
-const Template = (args) => <Contact {...args} />;
+const Template = (args) => <Price {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-    children: '+7(999) 111-11-11',
+    children: 123456.789,
+    currency: 'RUB',
     customFormat: undefined,
     isRawHTML: false,
     isTruncated: false,
+    locale: 'ru-RU',
     numOfLines: 1,
     textStyle: undefined,
 };
@@ -110,26 +134,38 @@ Default.argTypes = {
     ...ARG_TYPES,
 };
 
-export const CustomFun = (args) => (
-    <Contact customFormat={(s) => s.replace(/\s/g, '-')}>
-        8 999 111 11 11
-    </Contact>
-);
-
-export const Email = (args) => (
-    <Contact>test@test.ru</Contact>
-);
+export const CustomFun = Template.bind({});
+CustomFun.args = {
+    ...Default.args,
+    customFormat: (v) => (
+        `${new Intl.NumberFormat('ru-RU', {maximumFractionDigits: 2}).format(v)} ♠`
+    ),
+};
+CustomFun.argTypes = {
+    ...ARG_TYPES,
+};
 
 export const WithTextstyle = (args) => (
     <>
         <Text color="brand.primary" textStyle="h2">
             {'Какой то текст '}
-            <Contact>8 999 111 11 11</Contact>
+            <Price
+                currency="USD"
+                locale="en"
+            >
+                a123456.789a
+            </Price>
         </Text>
         <br />
         <Text color="brand.primary" textStyle="p1">
             {'Какой то текст '}
-            <Contact color="inherit" textStyle="h2">8 999 111 11 11</Contact>
+            <Price
+                currency="KZT"
+                locale="ru-KZ"
+                textStyle="h2"
+            >
+                12a3456.789
+            </Price>
         </Text>
     </>
 );
