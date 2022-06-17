@@ -5,13 +5,13 @@ const DISABLED = {
 
 export const Link = {
     baseStyle: {
-        color: 'brand.primary',
+        color: 'inherit',
+        cursor: 'pointer',
+        textDecoration: 'underline',
+
         transitionProperty: 'property.colors',
         transitionDuration: 'duration.normal',
         transitionTimingFunction: 'easing.ease-out',
-
-        textDecoration: 'underline',
-        cursor: 'pointer',
 
         _hover: {
             textDecoration: 'none',
