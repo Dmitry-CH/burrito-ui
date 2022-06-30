@@ -46,14 +46,26 @@ const config = {
         property: 'stroke',
         scale: 'colors',
     },
-    transition: {
-        property: 'transition',
-    },
     transform: {
         property: 'transform',
     },
     transformOrigin: {
         property: 'transform-origin',
+    },
+    transition: {
+        property: 'transition',
+    },
+    transitionDuration: {
+        property: 'transition-duration',
+        scale: 'transition',
+    },
+    transitionProperty: {
+        property: 'transition-property',
+        scale: 'transition',
+    },
+    transitionTimingFunction: {
+        property: 'transition-timing-function',
+        scale: 'transition',
     },
     textOverflow: {
         property: 'text-overflow',

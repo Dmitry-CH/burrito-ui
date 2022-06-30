@@ -29,9 +29,13 @@ const config = {
     gridColumn: {
         property: 'grid-column',
     },
+    gridColumnStart: true,
+    gridColumnEnd: true,
     gridRow: {
         property: 'grid-row',
     },
+    gridRowStart: true,
+    gridRowEnd: true,
     gridTemplateAreas: {
         property: 'grid-template-areas',
     },

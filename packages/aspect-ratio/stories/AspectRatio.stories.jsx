@@ -36,7 +36,7 @@ const ARG_TYPES = {
         description: 'Соотношение сторон.',
         table: {
             type: {
-                summary: 'string | undefined',
+                summary: 'string | (string|null)[] | undefined',
             },
             defaultValue: {
                 summary: '16x9',
@@ -67,8 +67,11 @@ const Template = (args) => (
 export const Default = Template.bind({});
 Default.args = {
     isRawHTML: false,
-    ratio: ['16x9', '21x9'],
+    ratio: ['16x9', null, '21x9', '32x9'],
 };
 Default.argTypes = {
     ...ARG_TYPES,
+    children: {
+        control: false,
+    },
 };

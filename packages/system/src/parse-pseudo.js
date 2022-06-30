@@ -5,11 +5,15 @@ export const pseudoSelectors = {
     /**
      * Styles for CSS selector `&:hover`
      */
-    _hover: "&:hover, &[data-hover]",
+    _hover: '&:hover, &[data-hover]',
     /**
      * Styles for CSS Selector `&:active`
      */
-    _active: "&:active, &[data-active]",
+    _active: '&:active, &[data-active]',
+    /**
+     * Styles to apply when this element is disabled.
+     */
+    _disabled: '&:disabled, &[aria-disabled=true]',
 };
 
 export function parsePseudo(val) {
@@ -24,6 +28,7 @@ const isObject = R.is(Object);
 
 const toObject = R.curryN(2, R.converge)(R.zipObj);
 const toTranspose = R.pipe(
+    // eslint-disable-next-line no-multi-spaces
     R.toPairs,   // {a: 1, b: 2}     -> [[a, 1], [b, 2]]
     R.transpose, // [[a, 1], [b, 2]] -> [[a, b], [1, 2]]
 );

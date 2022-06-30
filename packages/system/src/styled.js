@@ -1,4 +1,4 @@
-import _styled from 'styled-components';
+import _styled, {css} from 'styled-components';
 
 import {mapToTheme, resolveStyledProps} from '@burrito-ui/styled-system';
 
@@ -19,7 +19,10 @@ export function styled(component, style = {}, opts = {}) {
         styledFn = styledFn.attrs(opts.attrs);
     }
 
-    return styledFn(toCSSObject(style));
+    // https://spectrum.chat/styled-components/help/how-can-i-use-a-custom-animation-with-the-style-object-syntax~91d624ea-a5a3-4d0e-9314-4da860059112
+    return styledFn(toCSSObject(style), css`
+        animation-name: ${opts.keyframes}
+    `);
 }
 
 const PSEUDO_NAMES = Object.keys(pseudoSelectors);
@@ -35,7 +38,7 @@ const toCSSObject = (styled) => (props) => {
 
     const mergedStyles = Object.assign({},
         baseStyles,
-        propsStyles
+        propsStyles,
     );
 
     const [systemStyles, pseudoStyles, sxStyles] = extractStyles(mergedStyles);

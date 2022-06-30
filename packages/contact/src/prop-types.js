@@ -5,12 +5,14 @@ import {
     integer,
     object,
     optional,
+    string,
 } from 'superstruct';
 
 import {BaseTypes, EventTypes, StyleTypes} from '@burrito-ui/shared';
 
 
 const CustomTypes = object({
+    children: string(),
     customFormat: optional(func()),
     isRawHTML: optional(boolean()),
     isTruncated: optional(boolean()),

@@ -3,12 +3,7 @@ export function ratio(props) {
         sx: {
             position: 'relative',
 
-            '&::before': {
-                content: '""',
-                display: 'block',
-            },
-
-            ...createCSSObject(props),
+            ...parseRatio(props),
 
             '& > *': {
                 position: 'absolute',
@@ -32,31 +27,35 @@ export function ratio(props) {
     };
 }
 
-const createCSSObject = ({ratio, theme = {}}) => {
-    if (Array.isArray(ratio)) {
-        const {breakpoints = []} = theme;
-        const media = {};
-
-        ratio.forEach((rt, i) => {
-            if (rt == null) return;
-
-            media[`@media screen and (min-width: ${breakpoints[i]})`] = {
-                '&::before': {
-                    'padding-bottom': makeRatio(rt),
-                },
-            };
-        });
-
-        return media;
-    }
-
-    return {
+const parseRatio = ({ratio, theme = {}}) => {
+    const css = {
         '&::before': {
             content: '""',
             display: 'block',
-            'padding-bottom': makeRatio(ratio),
         },
     };
+
+    if (Array.isArray(ratio)) {
+        css['&::before']['padding-bottom'] = makeRatio(ratio[0]);
+
+        const {breakpoints = []} = theme;
+
+        for (let i = 1; i < ratio.length; i++) {
+            if (ratio[i] == null) continue;
+
+            css[`@media screen and (min-width: ${breakpoints[i - 1]})`] = {
+                '&::before': {
+                    'padding-bottom': makeRatio(ratio[i]),
+                },
+            };
+        }
+
+        return css;
+    }
+
+    css['&::before']['padding-bottom'] = makeRatio(ratio);
+
+    return css;
 };
 
 const makeRatio = (ratio) => {

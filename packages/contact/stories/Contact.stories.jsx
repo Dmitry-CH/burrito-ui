@@ -91,7 +91,7 @@ const ARG_TYPES = {
 };
 
 export default {
-    title: 'Content/Contact',
+    title: 'Data Display/Contact',
     component: Contact,
 };
 
@@ -110,7 +110,7 @@ Default.argTypes = {
     ...ARG_TYPES,
 };
 
-export const CustomPhone = (args) => (
+export const CustomFun = (args) => (
     <Contact customFormat={(s) => s.replace(/\s/g, '-')}>
         8 999 111 11 11
     </Contact>
